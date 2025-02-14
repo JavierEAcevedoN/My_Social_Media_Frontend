@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #1e1e1e;
+    --color-secondary: #2c2c2c;
+    --color-third: #333;
+    --color-four: #08f7fe;
+    --color-five: #06c4d3;
+
+    --shadow-input-auth: 0px 0px 8px;
+
+    --default-transition-duration: 300ms;
+}
