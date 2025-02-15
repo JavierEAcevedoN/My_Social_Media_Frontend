@@ -12,7 +12,9 @@ const Dashboard = () => {
             </nav>
 
             <section className="overflow-y-auto h-screen border-x border-secondary transition-all scrollbar scrollbar-track-third scrollbar-thumb-secondary hover:scrollbar-thumb-five">
-                <Outlet />
+                <div className="flex flex-col gap-8 m-2">
+                    <Outlet />
+                </div>
             </section>
 
             <aside className="flex flex-col items-center">

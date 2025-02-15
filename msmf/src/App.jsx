@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Publications from "./routes/dashboard/Publications";
 import Comments from "./routes/dashboard/Comments";
 import Likes from "./routes/dashboard/Likes"
+import Followers from "./routes/dashboard/Followers";
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                                 <Route path="publications" element={<Publications />} />
                                 <Route path="comments/:id" element={<Comments />} />
                                 <Route path="likes/:id" element={<Likes />} />
+                                <Route path="followers" element={<Followers />} />
                             </Route>
                         <Route path="*" element={<Navigate to="/" />} />
                     </Routes>

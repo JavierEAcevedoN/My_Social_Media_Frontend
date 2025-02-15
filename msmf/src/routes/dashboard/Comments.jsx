@@ -18,7 +18,7 @@ const Comments = () => {
     const comments = publication.comments;
 
     return (
-        <div className="flex flex-col gap-8 m-2">
+        <>
             <PublicationCard
                 key={publication.id}
                 id={publication.id}
@@ -45,7 +45,7 @@ const Comments = () => {
                     tagged={comment.tagged?.username || null}
                 />
             ))}
-        </div>
+        </>
     )
 };
 

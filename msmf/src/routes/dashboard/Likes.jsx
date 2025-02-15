@@ -19,7 +19,7 @@ const Comments = () => {
     console.log(likes);
 
     return (
-        <div className="flex flex-col gap-8 m-2">
+        <>
             <PublicationCard
                 key={publication.id}
                 id={publication.id}
@@ -43,7 +43,7 @@ const Comments = () => {
                     liked={comment.liked}
                 />
             ))}
-        </div>
+        </>
     )
 };
 

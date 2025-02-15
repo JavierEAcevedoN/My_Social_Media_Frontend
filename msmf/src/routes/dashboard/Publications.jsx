@@ -10,7 +10,7 @@ const Publications = () => {
 
 
     return (
-        <div className="flex flex-col gap-8 m-2">
+        <>
             {publications.map(publication => (
                 <PublicationCard
                     key={publication.id}
@@ -28,7 +28,7 @@ const Publications = () => {
                     likeCount={publication.likes.length}
                 />
             ))}
-        </div>
+        </>
     );
 };
 
