@@ -1,13 +1,56 @@
 @import "tailwindcss";
+@plugin 'tailwind-scrollbar';
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
     --color-primary: #1e1e1e;
+    --color-primary-text: #ffffff;
+    --color-second-text: #797979;
+    --color-third-text: #1e51ee;
     --color-secondary: #2c2c2c;
     --color-third: #333;
     --color-four: #08f7fe;
     --color-five: #06c4d3;
 
+    --color-input: #6a7282;
+    --color-input-focus: #53eafd;
+    --color-input-invalid: #e7000b;
+    --color-input-shadow: #0092b8;
+
+
     --shadow-input-auth: 0px 0px 8px;
 
     --default-transition-duration: 300ms;
 }
+
+.ligth {
+    --color-primary: #d2d2d2;
+    --color-secondary: #c0c0c0;
+    --color-third: #b7b7b7;
+
+    --color-four: #77984e;
+    --color-five: #7ab776;
+
+    --color-input: #484848;
+    --color-input-focus: #759850;
+    --color-input-invalid: #c4ffd6;
+    --color-input-shadow: #b3ffb8;
+}
+
+.dark {
+    --color-primary: #1e1e1e;
+    --color-primary-text: #ffffff;
+    --color-second-text: #797979;
+    --color-secondary: #2c2c2c;
+    --color-third: #333;
+    --color-four: #08f7fe;
+    --color-five: #06c4d3;
+
+    --color-input: #6a7282;
+    --color-input-focus: #53eafd;
+    --color-input-invalid: #e7000b;
+    --color-input-shadow: #0092b8;
+}
+
+/* cambiar los colores despues */

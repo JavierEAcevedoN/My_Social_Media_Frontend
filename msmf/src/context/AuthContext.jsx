@@ -7,22 +7,47 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     const login = async (username, password) => {
-        const { data } = await axios.post("http://localhost:8080/auth/login", { username, password });
-        localStorage.setItem("token", data.token);
-        setUser({ username });
-        console.log(user);
+        try {
+            const { data } = await axios.post("http://localhost:8080/auth/login", { username, password });
+
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("username", username);
+            setUser(username);
+
+        } catch (error) {
+            console.error("Error in Login:", error.response?.data?.message || error.message);
+            throw error;
+        }
     };
 
     const signin = async (username, email, fullName, password, phone, birthDate) => {
-        const { data } = await axios.post("http://localhost:8080/auth/register", { username, email, fullName, password, phone, birthDate });
-        localStorage.setItem("token", data.token);
-        setUser({ username });
-    }
+        try {
+            const { data } = await axios.post("http://localhost:8080/auth/register", { username, email, fullName, password, phone, birthDate });
+
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("username", username);
+            setUser(username);
+
+        } catch (error) {
+            console.error("Error in SignIn:", error.response?.data?.message || error.message);
+            throw error;
+        }
+    };
 
     const logout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("username");
         setUser(null);
     };
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        const storedUsername = localStorage.getItem("username");
+
+        if (token && storedUsername) {
+            setUser(storedUsername);
+        }
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user, login, logout, signin }}>
