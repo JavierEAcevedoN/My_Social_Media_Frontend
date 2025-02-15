@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const PublicationCard = ({
+    id,
     profilePhoto,
     fullName,
     username,
@@ -9,6 +11,7 @@ const PublicationCard = ({
     content,
     tags,
     imgSrc,
+    toPrev,
     commentCount,
     likeCount,
 }) => {
@@ -56,8 +59,8 @@ const PublicationCard = ({
             </header>
 
             <main className="mt-2">
-                <p className="text-primary-text">{content}</p>
-                <div className="text-third-text flex flex-wrap gap-1">
+                <p className="text-primary-text break-words">{content}</p>
+                <div className="text-four flex flex-wrap gap-1">
                     {tagsSpan}
                 </div>
                 {imageLoaded && imgSrc && (
@@ -71,7 +74,7 @@ const PublicationCard = ({
             </main>
 
             <footer className="mt-3 flex justify-around">
-                <span className="text-primary-text flex items-center gap-1 hover:text-blue-500 cursor-pointer transition-colors">
+                <Link to={`${toPrev}/comments/${id}`} className="text-primary-text flex items-center gap-1 hover:text-blue-500 cursor-pointer transition-colors">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="32"
@@ -88,8 +91,8 @@ const PublicationCard = ({
                         />
                     </svg>
                     {commentCount}
-                </span>
-                <span className="text-primary-text flex items-center gap-1 hover:text-red-500 cursor-pointer transition-colors">
+                </Link>
+                <Link to={`${toPrev}/likes/${id}`} className="text-primary-text flex items-center gap-1 hover:text-red-500 cursor-pointer transition-colors">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="32"
@@ -106,7 +109,7 @@ const PublicationCard = ({
                         />
                     </svg>
                     {likeCount}
-                </span>
+                </Link>
             </footer>
         </article>
     );

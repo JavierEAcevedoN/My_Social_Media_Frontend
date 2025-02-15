@@ -1,29 +1,36 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { PublicationProvider } from "./context/PublicationContext";
 import Dashboard from "./layout/Dashboard"
 import Auth from "./layout/Auth";
 import Signin from "./routes/auth/Signin";
 import Login from "./routes/auth/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Publications from "./routes/dashboard/Publications";
+import Comments from "./routes/dashboard/Comments";
+import Likes from "./routes/dashboard/Likes"
 
 function App() {
     return (
         <AuthProvider>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<Auth />}>
-                        <Route index element={<Login />} />
-                        <Route path="login" element={<Login />} />
-                        <Route path="register" element={<Signin />} />
-                    </Route>
-                    <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
-                        <Route index element={<Publications />} />
-                        <Route path="publications" element={<Publications />} />
-                    </Route>
-                    <Route path="*" element={<Navigate to="/" />} />
-                </Routes>
-            </Router>
+            <PublicationProvider>
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<Auth />}>
+                            <Route index element={<Login />} />
+                            <Route path="login" element={<Login />} />
+                            <Route path="register" element={<Signin />} />
+                        </Route>
+                            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
+                                <Route index element={<Publications />} />
+                                <Route path="publications" element={<Publications />} />
+                                <Route path="comments/:id" element={<Comments />} />
+                                <Route path="likes/:id" element={<Likes />} />
+                            </Route>
+                        <Route path="*" element={<Navigate to="/" />} />
+                    </Routes>
+                </Router>
+            </PublicationProvider>
         </AuthProvider>
     );
 }
