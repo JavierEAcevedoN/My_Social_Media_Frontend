@@ -10,6 +10,7 @@ import Publications from "./routes/dashboard/Publications";
 import Comments from "./routes/dashboard/Comments";
 import Likes from "./routes/dashboard/Likes"
 import Followers from "./routes/dashboard/Followers";
+import Following from "./routes/dashboard/Following";
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                                 <Route path="comments/:id" element={<Comments />} />
                                 <Route path="likes/:id" element={<Likes />} />
                                 <Route path="followers" element={<Followers />} />
+                                <Route path="following" element={<Following />} />
                             </Route>
                         <Route path="*" element={<Navigate to="/" />} />
                     </Routes>

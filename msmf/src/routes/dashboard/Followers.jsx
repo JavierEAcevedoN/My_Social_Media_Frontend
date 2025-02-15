@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
-import { Navigate } from "react-router-dom";
 import UserCard from "../../components/UserCard";
 import api from "../../api";
 
@@ -27,11 +26,11 @@ const Followers = () => {
     }, []);
 
     if (loading) return <p>Loading Followers...</p>;
-    if (error) return <p className="text-red-500">Error: {error}</p>;
+    if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
     console.log(followers);
 
-    if (!followers) return <h1 className="self-center">No tienes seguidores</h1>;
+    if (!followers) return <h1 className="self-center">You don't have followers</h1>;
 
     return (
         <>

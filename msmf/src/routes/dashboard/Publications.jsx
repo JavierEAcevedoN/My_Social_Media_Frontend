@@ -6,7 +6,7 @@ const Publications = () => {
     const { publications, loading, error } = useContext(PublicationContext);
 
     if (loading) return <p>Cargando publicaciones...</p>;
-    if (error) return <p className="text-red-500">Error: {error}</p>;
+    if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
 
     return (

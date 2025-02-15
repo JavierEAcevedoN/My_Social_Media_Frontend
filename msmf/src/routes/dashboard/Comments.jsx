@@ -11,7 +11,7 @@ const Comments = () => {
     const publication = publications.find(i => i.id == idPublicaton)
 
     if (loading) return <p>Cargando publicaciones...</p>;
-    if (error) return <p className="text-red-500">Error: {error}</p>;
+    if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
     if (!publication) return <Navigate to="/dashboard" replace />;
 
