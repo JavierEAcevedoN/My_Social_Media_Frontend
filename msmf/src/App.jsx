@@ -12,6 +12,7 @@ import Likes from "./routes/dashboard/Likes"
 import Followers from "./routes/dashboard/Followers";
 import Following from "./routes/dashboard/Following";
 import Notifications from "./routes/dashboard/Notifications";
+import Profile from "./routes/dashboard/Profile";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                                 <Route path="followers" element={<Followers />} />
                                 <Route path="following" element={<Following />} />
                                 <Route path="notifications" element={<Notifications />} />
+                                <Route path="profile" element={<Profile />} />
                             </Route>
                         <Route path="*" element={<Navigate to="/" />} />
                     </Routes>

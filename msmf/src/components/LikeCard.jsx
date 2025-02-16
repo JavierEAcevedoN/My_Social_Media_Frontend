@@ -18,7 +18,7 @@ const UserCard = ({
                     onError={(e) => e.target.src = DEFAULT_PROFILE_PHOTO}
                 />
                 <div>
-                    <h3 className="font-semibold text-primary-text">
+                    <h3 className="font-semibold text-primary-text break-all">
                         {fullName}
                     </h3>
                     <div className="text-second-text text-sm">

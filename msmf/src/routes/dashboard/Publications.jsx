@@ -5,7 +5,7 @@ import PublicationCard from "../../components/PublicationCard";
 const Publications = () => {
     const { publications, loading, error } = useContext(PublicationContext);
 
-    if (loading) return <p>Cargando publicaciones...</p>;
+    if (loading) return <p>Loading publications...</p>;
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
 

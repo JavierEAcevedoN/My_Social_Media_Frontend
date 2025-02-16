@@ -11,7 +11,7 @@ const Notifications = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchFollowers = async () => {
+        const fetchNotifications = async () => {
             try {
                 const { data } = await api.get(`/notifications/${user}`);
                 setNotifications(data)
@@ -22,7 +22,7 @@ const Notifications = () => {
             }
         };
 
-        fetchFollowers();
+        fetchNotifications();
     }, []);
 
     if (loading) return <p>Loading Notifications...</p>;
@@ -31,6 +31,8 @@ const Notifications = () => {
     console.log(notifications);
 
     if (!notifications) return <h1 className="self-center">You don't have notifications</h1>;
+
+    // Todo: agregar el boton de leido
 
     return (
         <>

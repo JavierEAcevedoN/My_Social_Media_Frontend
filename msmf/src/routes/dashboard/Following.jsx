@@ -11,7 +11,7 @@ const Following = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchFollowers = async () => {
+        const fetchFollowing = async () => {
             try {
                 const { data } = await api.get(`/follows/following/${user}`);
                 setFollowing(data)
@@ -22,7 +22,7 @@ const Following = () => {
             }
         };
 
-        fetchFollowers();
+        fetchFollowing();
     }, []);
 
     if (loading) return <p>Loading Following...</p>;
