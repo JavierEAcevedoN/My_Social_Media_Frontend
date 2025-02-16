@@ -28,8 +28,6 @@ const Notifications = () => {
     if (loading) return <p>Loading Notifications...</p>;
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
-    console.log(notifications);
-
     if (!notifications) return <h1 className="self-center">You don't have notifications</h1>;
 
     // Todo: agregar el boton de leido
@@ -38,6 +36,7 @@ const Notifications = () => {
         <>
             {notifications.map(notification => (
                 <NotificationCard
+                    key={notification.id}
                     sended={notification.sended}
                     content={notification.content}
                 />

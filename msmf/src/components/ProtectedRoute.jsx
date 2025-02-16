@@ -1,18 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
-    const { user } = useContext(AuthContext);
-    const [isLoading, setIsLoading] = useState(true);
+    const { user, loading } = useContext(AuthContext);
 
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 500);
-    }, []);
-
-    if (isLoading) {
+    if (loading) {
         return <div className="bg-primary text-white flex justify-center items-center h-screen">Cargando...</div>;
     }
 

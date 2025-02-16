@@ -5,14 +5,14 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const login = async (username, password) => {
         try {
             const { data } = await axios.post("http://localhost:8080/auth/login", { username, password });
 
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("username", username);
-            setUser(username);
+            sessionStorage.setItem("token", data.token);
+            setUser(decodeToken(data.token));
 
         } catch (error) {
             console.error("Error in Login:", error.response?.data?.message || error.message);
@@ -24,9 +24,8 @@ export const AuthProvider = ({ children }) => {
         try {
             const { data } = await axios.post("http://localhost:8080/auth/register", { username, email, fullName, password, phone, birthDate });
 
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("username", username);
-            setUser(username);
+            sessionStorage.setItem("token", data.token);
+            setUser(decodeToken(data.token));
 
         } catch (error) {
             console.error("Error in SignIn:", error.response?.data?.message || error.message);
@@ -35,23 +34,32 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
+        sessionStorage.removeItem("token");
         setUser(null);
-        window.location = "/"
+        window.location = "/";
+    };
+
+    const decodeToken = (token) => {
+        try {
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            return payload.sub;
+        } catch (error) {
+            console.error("Error decoding token:", error);
+            return null;
+        }
     };
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
-        const storedUsername = localStorage.getItem("username");
+        const token = sessionStorage.getItem("token");
 
-        if (token && storedUsername) {
-            setUser(storedUsername);
+        if (token) {
+            setUser(decodeToken(token));
         }
+        setLoading(false);
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, signin }}>
+        <AuthContext.Provider value={{ user, loading, login, logout, signin }}>
             {children}
         </AuthContext.Provider>
     );

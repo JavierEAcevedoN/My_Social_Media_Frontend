@@ -58,7 +58,6 @@ const Profile = () => {
                     content={publication.content}
                     tags={publication.tags}
                     imgSrc={publication.imgSrc || ""}
-                    toPrev={"../."}
                     commentCount={publication.comments.length}
                     likeCount={publication.likes.length}
                 />

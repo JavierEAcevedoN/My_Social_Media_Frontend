@@ -15,7 +15,7 @@ const Comments = () => {
 
     if (!publication) return <Navigate to="/dashboard" replace />;
 
-    const comments = publication.comments;
+    const comments = publication.comments || [];
 
     return (
         <>
@@ -30,12 +30,12 @@ const Comments = () => {
                 content={publication.content}
                 tags={publication.tags}
                 imgSrc={publication.imgSrc || ""}
-                toPrev={".."}
                 commentCount={publication.comments.length}
                 likeCount={publication.likes.length}
             />
             {comments.map(comment => (
                 <CommentCard
+                    key={comment.id}
                     profilePhoto={comment.username.profilePhoto || "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"}
                     fullName={comment.username.fullName}
                     username={comment.username.username}

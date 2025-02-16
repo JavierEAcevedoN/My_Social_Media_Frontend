@@ -30,7 +30,7 @@ const ProfilePage = ({
     }
 
     return (
-        <div className="bg-secondary rounded-xl p-4 w-full flex items-center justify-around g-1 flex-wrap">
+        <div className="bg-secondary rounded-xl p-4 w-full flex items-center shadow-md shadow-third justify-around g-1 flex-wrap">
             <div className="w-48">
                 <img
                     src={profilePhoto || DEFAULT_PROFILE_PHOTO}

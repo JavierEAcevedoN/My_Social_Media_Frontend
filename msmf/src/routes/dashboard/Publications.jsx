@@ -8,7 +8,6 @@ const Publications = () => {
     if (loading) return <p>Loading publications...</p>;
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
-
     return (
         <>
             {publications.map(publication => (
@@ -23,7 +22,6 @@ const Publications = () => {
                     content={publication.content}
                     tags={publication.tags}
                     imgSrc={publication.imgSrc || ""}
-                    toPrev={"."}
                     commentCount={publication.comments.length}
                     likeCount={publication.likes.length}
                 />

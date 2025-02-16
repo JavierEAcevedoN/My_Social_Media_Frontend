@@ -18,6 +18,7 @@
     --color-input-invalid: #e7000b;
     --color-input-shadow: #0092b8;
 
+    --color-like: #ff0000;
 
     --shadow-input-auth: 0px 0px 8px;
 
@@ -55,5 +56,3 @@
     --color-input-invalid: #e7000b;
     --color-input-shadow: #0092b8;
 }
-
-/* cambiar los colores despues */

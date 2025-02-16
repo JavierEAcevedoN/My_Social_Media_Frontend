@@ -16,7 +16,7 @@ const CommentCard = ({
     const DEFAULT_PROFILE_PHOTO = "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png";
 
     return (
-        <article className="bg-secondary p-4 rounded-xl shadow-md border border-third 200 max-w-xl mx-auto w-full">
+        <article className="bg-secondary p-4 rounded-xl shadow-md shadow-third border border-third 200 max-w-xl mx-auto w-full">
             <header className="flex flex-col items-start sm:flex-row gap-3">
                 <img 
                     src={profilePhoto || DEFAULT_PROFILE_PHOTO} 

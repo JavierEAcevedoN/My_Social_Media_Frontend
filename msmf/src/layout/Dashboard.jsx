@@ -17,10 +17,11 @@ const Dashboard = () => {
                 <span className="py-2 transition-colors hover:text-four cursor-pointer" onClick={logout}>LogOut</span>
             </nav>
 
-            <section className="overflow-y-auto h-screen border-x border-secondary transition-all scrollbar scrollbar-track-third scrollbar-thumb-secondary hover:scrollbar-thumb-five relative">
+            {/* arreglar error con el color de la barra scroll */}
+            <section className="overflow-y-scroll h-screen border-x border-secondary transition-all scrollbar scrollbar-track-third scrollbar-thumb-secondary hover:scrollbar-thumb-five relative">
                 <button 
                     onClick={() => navigate(-1)} 
-                    className="absolute top-4 left-4 flex items-center text-primary-text hover:text-four transition-colors"
+                    className="absolute top-4 left-4 flex items-center text-primary-text hover:text-four transition-colors cursor-pointer"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m4 10l-.354.354L3.293 10l.353-.354zm16.5 8a.5.5 0 0 1-1 0zM8.646 15.354l-5-5l.708-.708l5 5zm-5-5.708l5-5l.708.708l-5 5zM4 9.5h10v1H4zM20.5 16v2h-1v-2zM14 9.5a6.5 6.5 0 0 1 6.5 6.5h-1a5.5 5.5 0 0 0-5.5-5.5z"/></svg>
                     Volver

@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
+import api from "../api";
 
 const PublicationCard = ({
     id,
@@ -11,7 +13,6 @@ const PublicationCard = ({
     content,
     tags,
     imgSrc,
-    toPrev,
     commentCount,
     likeCount,
 }) => {
@@ -36,9 +37,41 @@ const PublicationCard = ({
     const DEFAULT_PROFILE_PHOTO = "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png";
 
     const [imageLoaded, setImageLoaded] = useState(true);
+    
+    const { user } = useContext(AuthContext);
+    
+    const [liked, setLiked] = useState(false);
+
+    useEffect(() => {
+        const fetchIsLiked = async () => {
+            try {
+                const { data } = await api.get(`/likes/${user}/${id}`);
+                setLiked(data)
+            } catch (error) {
+                setError(error.response?.data?.message || "Error fetching isLiked");
+            }
+        };
+        fetchIsLiked();
+    }, []);
+
+    const toggleLike = async () => {
+        if (!window.location.pathname.includes("likes")) return;
+
+        try {
+            if (!liked) {
+                await api.post(`/likes/${user}/${id}`);
+            } else {
+                await api.delete(`/likes/${user}/${id}`);                
+            }
+            setLiked(!liked)
+            setTimeout(() => window-location.reload(),300)
+        } catch (error) {
+            console.error(error.response?.data?.message || "Error fetching isLiked");
+        }
+    };
 
     return (
-        <article className="bg-secondary p-4 rounded-xl shadow-md border border-third 200 max-w-xl mx-auto w-full">
+        <article className="bg-secondary p-4 rounded-xl shadow-md shadow-third border border-third 200 max-w-xl mx-auto w-full">
             <header className="flex flex-col items-start sm:flex-row gap-3">
                 <img 
                     src={profilePhoto || DEFAULT_PROFILE_PHOTO} 
@@ -74,7 +107,7 @@ const PublicationCard = ({
             </main>
 
             <footer className="mt-3 flex justify-around">
-                <Link to={`${toPrev}/comments/${id}`} className="text-primary-text flex items-center gap-1 hover:text-blue-500 cursor-pointer transition-colors">
+                <Link to={`/dashboard/comments/${id}`} className="text-primary-text flex items-center gap-1 hover:text-blue-500 cursor-pointer transition-colors">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="32"
@@ -92,7 +125,7 @@ const PublicationCard = ({
                     </svg>
                     {commentCount}
                 </Link>
-                <Link to={`${toPrev}/likes/${id}`} className="text-primary-text flex items-center gap-1 hover:text-red-500 cursor-pointer transition-colors">
+                <Link to={`/dashboard/likes/${id}`} onClick={toggleLike} className={`${liked ? "text-like" : "text-primary-text"} flex items-center gap-1 ${liked ? "hover:text-primary-text" : "hover:text-like"} cursor-pointer transition-colors`}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="32"
@@ -100,7 +133,7 @@ const PublicationCard = ({
                         viewBox="0 0 48 48"
                     >
                         <path
-                            fill="none"
+                            fill={liked ? "red" : "none"}
                             stroke="currentColor"
                             strokeLinecap="round"
                             strokeLinejoin="round"

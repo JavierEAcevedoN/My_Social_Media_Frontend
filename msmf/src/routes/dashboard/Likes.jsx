@@ -15,7 +15,7 @@ const Comments = () => {
 
     if (!publication) return <Navigate to="/dashboard" replace />;
 
-    const likes = publication.likes;
+    const likes = publication.likes || [];    
 
     return (
         <>
@@ -30,16 +30,16 @@ const Comments = () => {
                 content={publication.content}
                 tags={publication.tags}
                 imgSrc={publication.imgSrc || ""}
-                toPrev={".."}
                 commentCount={publication.comments.length}
                 likeCount={publication.likes.length}
             />
-            {likes.map(comment => (
+            {likes.map(like => (
                 <LikeCard
-                    profilePhoto={comment.username.profilePhoto || "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"}
-                    fullName={comment.username.fullName}
-                    username={comment.username.username}
-                    liked={comment.liked}
+                    key={like.id}
+                    profilePhoto={like.username.profilePhoto || "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"}
+                    fullName={like.username.fullName}
+                    username={like.username.username}
+                    liked={like.liked}
                 />
             ))}
         </>

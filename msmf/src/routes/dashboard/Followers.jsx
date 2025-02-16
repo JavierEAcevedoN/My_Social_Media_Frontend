@@ -34,6 +34,7 @@ const Followers = () => {
         <>
             {followers.map(follower => (
                 <UserCard
+                    key={follower.id}
                     profilePhoto={follower.followFrom.profilePhoto || "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"}
                     fullName={follower.followFrom.fullName}
                     username={follower.followFrom.username}
