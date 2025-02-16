@@ -52,7 +52,7 @@ const UserCard = ({
     };
 
     return (
-        <article className="bg-secondary p-4 rounded-xl shadow-md shadow-third border border-third 200 max-w-xl mx-auto w-full">
+        <article className="bg-secondary p-4 rounded-xl shadow-lg shadow-third border border-third 200 max-w-xl mx-auto w-full">
             <main className="flex items-start justify-between flex-col md:flex-row gap-3">
                 <div className="flex flex-col md:flex-row gap-3">
                     <img 
