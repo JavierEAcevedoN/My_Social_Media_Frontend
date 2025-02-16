@@ -25,7 +25,7 @@ const Following = () => {
         fetchFollowing();
     }, []);
 
-    if (loading) return <p>Loading Following...</p>;
+    if (loading) return <p className="self-center">Loading Following...</p>;
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
     if (!following) return <h1 className="self-center">You aren't following</h1>;

@@ -49,11 +49,10 @@ const ProfilePage = ({
                 <p className="mt-1 text-sm text-primary-text">{phone}</p>
                 <p className="mt-1 text-sm text-primary-text">{brithDate}</p>
                 <button
-                    className="text-2xl mt-4 bg-third text-primary-text p-2 rounded-2xl"
-                    variant={following ? "secondary" : "default"}
+                    className={`text-2xl mt-4 ${following ? "bg-primary hover:bg-third  text-primary-text hover:text-second-text" : "bg-third hover:bg-primary text-second-text hover:text-primary-text"} transition-colors p-2 rounded-2xl outline outline-input `}
                     onClick={() => setFollowing(!following)}
                 >
-                    {following ? "Siguiendo" : "Seguir"}
+                    {following ? "Following" : "Follow"}
                 </button>
             </div>
         </div>

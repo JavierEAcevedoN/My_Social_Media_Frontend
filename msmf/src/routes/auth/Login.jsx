@@ -23,12 +23,12 @@ const Login = () => {
             <h2 className="text-xl font-bold mb-4">Sing In</h2>
             <div className="flex flex-col gap-2">
                 <label>User:
-                    <input className="rounded-2xl outline outline-gray-500 bg-third p-2.5 w-full transition-shadow focus:outline-cyan-300 focus:shadow-input-auth focus:shadow-cyan-600" type="text" placeholder="Usuario" name="username" required value={username} onChange={(e) => setUsername(e.target.value)} />
+                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow" type="text" placeholder="Usuario" name="username" required value={username} onChange={(e) => setUsername(e.target.value)} />
                 </label>
             </div>
             <div className="flex flex-col gap-2">
                 <label>Password:
-                    <input className="rounded-2xl outline outline-gray-500 bg-third p-2.5 w-full transition-shadow focus:outline-cyan-300 focus:shadow-input-auth focus:shadow-cyan-600" type="password" placeholder="Contraseña" name="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow" type="password" placeholder="Contraseña" name="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
                 </label>
             </div>
             <button className="bg-four text-black font-bold p-3 rounded cursor-pointer transition-colors hover:bg-five w-full" type="submit">Login</button>

@@ -10,7 +10,7 @@ const Comments = () => {
     const { publications, loading, error } = useContext(PublicationContext);
     const publication = publications.find(i => i.id == idPublicaton)
 
-    if (loading) return <p>Cargando publicaciones...</p>;
+    if (loading) return <p className="self-center">Loading likes...</p>;
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
     if (!publication) return <Navigate to="/dashboard" replace />;

@@ -25,7 +25,7 @@ const Notifications = () => {
         fetchNotifications();
     }, []);
 
-    if (loading) return <p>Loading Notifications...</p>;
+    if (loading) return <p className="self-center">Loading Notifications...</p>;
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
     if (!notifications) return <h1 className="self-center">You don't have notifications</h1>;

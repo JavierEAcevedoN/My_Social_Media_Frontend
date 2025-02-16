@@ -25,7 +25,7 @@ const Followers = () => {
         fetchFollowers();
     }, []);
 
-    if (loading) return <p>Loading Followers...</p>;
+    if (loading) return <p className="self-center">Loading Followers...</p>;
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
     if (!followers) return <h1 className="self-center">You don't have followers</h1>;

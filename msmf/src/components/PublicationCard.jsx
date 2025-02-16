@@ -48,11 +48,11 @@ const PublicationCard = ({
                 const { data } = await api.get(`/likes/${user}/${id}`);
                 setLiked(data)
             } catch (error) {
-                setError(error.response?.data?.message || "Error fetching isLiked");
+                console.error(error.response?.data?.message || "Error fetching isLiked");
             }
         };
         fetchIsLiked();
-    }, []);
+    }, [user, id]);
 
     const toggleLike = async () => {
         if (!window.location.pathname.includes("likes")) return;
@@ -64,7 +64,7 @@ const PublicationCard = ({
                 await api.delete(`/likes/${user}/${id}`);                
             }
             setLiked(!liked)
-            setTimeout(() => window-location.reload(),300)
+            setTimeout(() => window.location.reload(),300)
         } catch (error) {
             console.error(error.response?.data?.message || "Error fetching isLiked");
         }
@@ -125,7 +125,7 @@ const PublicationCard = ({
                     </svg>
                     {commentCount}
                 </Link>
-                <Link to={`/dashboard/likes/${id}`} onClick={toggleLike} className={`${liked ? "text-like" : "text-primary-text"} flex items-center gap-1 ${liked ? "hover:text-primary-text" : "hover:text-like"} cursor-pointer transition-colors`}>
+                <Link to={`/dashboard/likes/${id}`} onClick={toggleLike} className={`${liked ? "text-like hover:text-primary-text" : "text-primary-text hover:text-like"} flex items-center gap-1 cursor-pointer transition-colors`}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="32"

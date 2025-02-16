@@ -10,7 +10,7 @@ const UserCard = ({
 
     return (
         <article className="bg-secondary p-4 rounded-xl shadow-md shadow-third border border-third 200 max-w-xl mx-auto w-full">
-            <header className="flex items-start gap-3">
+            <header className="flex items-start flex-col sm:flex-row gap-3">
                 <img 
                     src={profilePhoto || DEFAULT_PROFILE_PHOTO} 
                     alt="User Avatar" 

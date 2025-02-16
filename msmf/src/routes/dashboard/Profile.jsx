@@ -28,7 +28,7 @@ const Profile = () => {
         fetchUserInfo();
     }, []);
 
-    if (loading) return <p>Loading publications...</p>;
+    if (loading) return <p className="self-center">Loading profile...</p>;
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
     if (!userPublications) return <h1 className="self-center">You don't have publications yet</h1>;
