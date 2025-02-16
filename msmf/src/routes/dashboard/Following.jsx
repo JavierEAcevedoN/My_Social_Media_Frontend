@@ -28,8 +28,6 @@ const Following = () => {
     if (loading) return <p>Loading Following...</p>;
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
-    console.log(following);
-
     if (!following) return <h1 className="self-center">You aren't following</h1>;
 
     return (

@@ -16,7 +16,6 @@ const Comments = () => {
     if (!publication) return <Navigate to="/dashboard" replace />;
 
     const likes = publication.likes;
-    console.log(likes);
 
     return (
         <>

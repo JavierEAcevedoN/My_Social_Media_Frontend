@@ -11,6 +11,7 @@ import Comments from "./routes/dashboard/Comments";
 import Likes from "./routes/dashboard/Likes"
 import Followers from "./routes/dashboard/Followers";
 import Following from "./routes/dashboard/Following";
+import Notifications from "./routes/dashboard/Notifications";
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                                 <Route path="likes/:id" element={<Likes />} />
                                 <Route path="followers" element={<Followers />} />
                                 <Route path="following" element={<Following />} />
+                                <Route path="notifications" element={<Notifications />} />
                             </Route>
                         <Route path="*" element={<Navigate to="/" />} />
                     </Routes>

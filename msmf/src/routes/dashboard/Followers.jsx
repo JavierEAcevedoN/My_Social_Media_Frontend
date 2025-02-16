@@ -28,8 +28,6 @@ const Followers = () => {
     if (loading) return <p>Loading Followers...</p>;
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
-    console.log(followers);
-
     if (!followers) return <h1 className="self-center">You don't have followers</h1>;
 
     return (
