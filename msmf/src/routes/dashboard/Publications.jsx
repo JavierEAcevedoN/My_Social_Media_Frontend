@@ -5,11 +5,10 @@ import PublicationForm from "../../components/PublicationFrom";
 
 const Publications = () => {
     const { publications, loading, error } = useContext(PublicationContext);
-    const [isFormOpen, setIsFormOpen] = useState(false);
+    const [isFormOpenSubmit, setIsFormOpenSubmit] = useState(false);
 
     if (loading) return <p className="self-center">Loading publications...</p>;
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
-
 
     return (
         <>
@@ -30,12 +29,12 @@ const Publications = () => {
                 />
             ))}
             <button 
-                onClick={() => setIsFormOpen(true)} 
-                className="fixed bottom-5 right-5 transition-colors bg-input hover:bg-input-focus text-primary-text px-4 py-2 rounded-full shadow-lg shadow-third"
+                onClick={() => setIsFormOpenSubmit(true)} 
+                className="fixed bottom-5 right-5 transition-colors bg-input hover:bg-input-focus text-primary-text px-4 py-2 rounded-full shadow-lg shadow-third cursor-pointer"
             >
                 + New publication
             </button>
-            <PublicationForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
+            <PublicationForm isOpen={isFormOpenSubmit} onClose={() => setIsFormOpenSubmit(false)} />
         </>
     );
 };

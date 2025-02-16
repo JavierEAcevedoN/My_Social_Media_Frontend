@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import api from "../api";
+import PublicationForm from "./PublicationFrom";
 
 const PublicationCard = ({
     id,
@@ -21,7 +22,7 @@ const PublicationCard = ({
     if (tags != null) {
         tagsSpan = tagsSpan.map((tag, index) => {
             return (
-                <span key={index} className="cursor-pointer ">{tag}</span>
+                <span key={index} className="cursor-pointer">{tag}</span>
             )
         })
     }
@@ -70,25 +71,50 @@ const PublicationCard = ({
         }
     };
 
+    const [isEditOpen, setIsEditOpen] = useState(false);
+
+    let optionsButton = null;
+
+    const handleDelete = async () => {
+        if (window.confirm("Are you sure to delete the publication")) {
+            try {
+                await api.delete(`/publications/${id}`);
+                setTimeout(() => window.location.reload(),300)
+            } catch (error) {
+                console.error(error.response?.data?.message || "Delete error");
+            }
+        }
+    };
+
+    if (username === user) {
+        optionsButton = <div className="flex flex-col gap-2">
+                            <button onClick={() => setIsEditOpen(true)} className="text-third-text">✏️ Editar</button>
+                            <button onClick={handleDelete} className="text-input-invalid">🗑️ Eliminar</button>
+                        </div>
+    }
+
     return (
         <article className="bg-secondary p-4 rounded-xl shadow-lg shadow-third border border-third 200 max-w-xl mx-auto w-full">
-            <header className="flex flex-col items-start sm:flex-row gap-3">
-                <img 
-                    src={profilePhoto || DEFAULT_PROFILE_PHOTO} 
-                    alt="User Avatar" 
-                    className="w-12 h-12 rounded-full"
-                    onError={(e) => e.target.src = DEFAULT_PROFILE_PHOTO}
-                />
-                <div>
-                    <h3 className="font-semibold text-primary-text break-words break-all">
-                        {fullName}
-                    </h3>
-                    <div className="text-second-text text-sm">
-                        <span>@{username} · </span>
-                        <span>{createdTime}</span>
-                        {updatedSpan}
+            <header className="flex flex-col justify-between items-start sm:flex-row gap-3">
+                <div className="flex flex-col md:flex-row gap-3">
+                    <img 
+                        src={profilePhoto || DEFAULT_PROFILE_PHOTO} 
+                        alt="User Avatar" 
+                        className="w-12 h-12 rounded-full"
+                        onError={(e) => e.target.src = DEFAULT_PROFILE_PHOTO}
+                    />
+                    <div>
+                        <h3 className="font-semibold text-primary-text break-words break-all">
+                            {fullName}
+                        </h3>
+                        <div className="text-second-text text-sm">
+                            <span>@{username} · </span>
+                            <span>{createdTime}</span>
+                            {updatedSpan}
+                        </div>
                     </div>
                 </div>
+                {optionsButton}
             </header>
 
             <main className="mt-2">
@@ -144,6 +170,7 @@ const PublicationCard = ({
                     {likeCount}
                 </Link>
             </footer>
+            <PublicationForm isOpen={isEditOpen} onClose={() => setIsEditOpen(false)} existingPublication={{ id, content, imgSrc, tags }} />
         </article>
     );
 };

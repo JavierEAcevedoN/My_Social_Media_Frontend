@@ -2,12 +2,12 @@ import { useState, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import api from "../api";
 
-const PublicationForm = ({ isOpen, onClose }) => {
+const PublicationForm = ({ isOpen, onClose, existingPublication }) => {
     const { user } = useContext(AuthContext);
     
-    const [content, setContent] = useState("");
-    const [imgSrc, setImgSrc] = useState("");
-    const [tags, setTags] = useState("");
+    const [content, setContent] = useState(existingPublication?.content ||"");
+    const [imgSrc, setImgSrc] = useState(existingPublication?.imgSrc ||"");
+    const [tags, setTags] = useState(existingPublication?.tags?.join(" ") ||"");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -19,7 +19,7 @@ const PublicationForm = ({ isOpen, onClose }) => {
         const newPublication = {
             content,
             created: new Date().toISOString(),
-            tags: tags.split(" ").filter(tag => tag.startsWith("#")), // Filtra solo los hashtags
+            tags: tags.split(" ").filter(tag => tag.startsWith("#")),
             imgSrc,
             username: {
                 "username":user
@@ -27,11 +27,15 @@ const PublicationForm = ({ isOpen, onClose }) => {
         };
 
         try {
-            await api.post("/publications", newPublication);
+            if (existingPublication) {
+                await api.patch(`/publications/${existingPublication.id}`, newPublication);
+            } else {
+                await api.post("/publications", newPublication);
+            }
             onClose();
             window.location.reload()
         } catch (error) {
-            setError(error.response?.data?.message || "Error to create publication");
+            setError(error.response?.data?.message || "Error to create/update publication");
         } finally {
             setLoading(false);
         }
@@ -42,7 +46,9 @@ const PublicationForm = ({ isOpen, onClose }) => {
     return (
         <div className="fixed inset-0 bg-primary bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-secondary p-6 rounded-lg shadow-lg max-w-md w-full">
-                <h2 className="text-xl font-bold mb-4 text-center">Nueva Publicación</h2>
+                <h2 className="text-xl font-bold mb-4 text-center">
+                    {existingPublication ? "Edit publication" : "New publication"}
+                </h2>
                 {error && <p className="text-red-500 text-sm text-center">{error}</p>}
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <textarea
@@ -71,16 +77,16 @@ const PublicationForm = ({ isOpen, onClose }) => {
                         <button 
                             type="button"
                             onClick={onClose}
-                            className="bg-third outline outline-input transition-colors text-primary-text px-4 py-2 rounded-lg hover:bg-primary"
+                            className="bg-third outline outline-input transition-colors text-primary-text px-4 py-2 rounded-lg hover:bg-primary cursor-pointer"
                         >
                             Cancel
                         </button>
                         <button 
                             type="submit"
                             disabled={loading}
-                            className="bg-third outline outline-input transition-colors text-primary-text px-4 py-2 rounded-lg hover:bg-five"
+                            className="bg-third outline outline-input transition-colors text-primary-text px-4 py-2 rounded-lg hover:bg-five cursor-pointer"
                         >
-                            {loading ? "Submitimg..." : "Submit"}
+                            {existingPublication ? "Save" : "Submit"}
                         </button>
                     </div>
                 </form>
