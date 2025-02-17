@@ -26,9 +26,7 @@ const UserCard = ({
     useEffect(() => {
         const fetchIsFollowing = async () => {
             try {
-                const { data } = await api.get(`/follows/${user}/${username}`);
-                console.log(data);
-                
+                const { data } = await api.get(`/follows/${user}/${username}`); 
                 setFollowing(data)
             } catch (error) {
                 console.error(error.response?.data?.message || "Error fetching isFollowing");
@@ -52,8 +50,8 @@ const UserCard = ({
     };
 
     return (
-        <article className="bg-secondary p-4 rounded-xl shadow-lg shadow-third border border-third 200 max-w-xl mx-auto w-full">
-            <main className="flex items-start justify-between flex-col md:flex-row gap-3">
+        <article className="bg-secondary p-4 rounded-xl shadow-lg shadow-third border border-third max-w-xl mx-auto w-full">
+            <main className="flex items-start justify-between flex-col lg:flex-row flex-wrap lg:flex-nowrap gap-3 w-full">
                 <div className="flex flex-col md:flex-row gap-3">
                     <img 
                         src={profilePhoto || DEFAULT_PROFILE_PHOTO} 
@@ -66,7 +64,7 @@ const UserCard = ({
                         <h3 className="font-semibold text-primary-text break-all">
                             {fullName}
                         </h3>
-                        <div className="text-second-text text-sm">
+                        <div className="text-second-text text-sm break-all lg:break-normal">
                             <span>@{username} · </span>
                             <span>{createdTime}</span>
                             {updatedSpan}
@@ -74,7 +72,7 @@ const UserCard = ({
                     </div>
                 </div>
                 <button
-                    className={`text-2xl ${following ? "bg-primary hover:bg-third  text-primary-text hover:text-second-text" : "bg-third hover:bg-primary text-second-text hover:text-primary-text"} transition-colors p-2 rounded-2xl outline outline-input `}
+                    className={`text-2xl break-all md:break-normal ${following ? "bg-primary hover:bg-third  text-primary-text hover:text-second-text" : "bg-third hover:bg-primary text-second-text hover:text-primary-text"} w-full lg:w-auto transition-colors p-2 rounded-2xl outline outline-input `}
                     onClick={toggleFollow}
                 >
                     {following ? "Following" : "Follow"}

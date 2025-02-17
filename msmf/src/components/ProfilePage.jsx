@@ -45,7 +45,7 @@ const ProfilePage = ({
 
     return (
         <div className="bg-secondary rounded-xl p-4 w-full flex items-center shadow-lg shadow-third justify-around g-1 flex-wrap">
-            <div className="w-56">
+            <div className="w-60">
                 <img
                     src={profilePhoto || DEFAULT_PROFILE_PHOTO}
                     alt="Profile"
@@ -57,7 +57,7 @@ const ProfilePage = ({
                 <p className="mt-1 text-sm text-primary-text">{createdTime}</p>
                 {updatedP}
             </div>
-            <div>
+            <div className="w-72">
                 {biographyP}
                 <p className="mt-1 text-sm text-primary-text">{email}</p>
                 <p className="mt-1 text-sm text-primary-text">{phone}</p>
