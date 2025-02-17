@@ -48,11 +48,12 @@ const EditProfileForm = ({
                 {error && <p className="text-red-500 text-sm text-center mb-1">{error}</p>}
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <input
-                        type="text"
+                        type="url"
                         placeholder="Profile Photo URL"
                         value={newProfilePhoto}
                         onChange={(e) => setNewProfilePhoto(e.target.value)}
                         className="outline outline-input transition-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full"
+                        title="only an url"
                     />
                     <input
                         type="text"
@@ -61,12 +62,16 @@ const EditProfileForm = ({
                         onChange={(e) => setNewFullName(e.target.value)}
                         required
                         className="outline outline-input transition-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full"
-                    />
+                        pattern="^[A-Za-z0-9 ]*$"
+                        title="only letters, numbers and spaces"
+                        maxLength={512}
+                        />
                     <textarea
                         placeholder="Biography"
                         value={newBiography}
                         onChange={(e) => setNewBiography(e.target.value)}
-                        className="outline outline-input transition-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full resize-none h-40"
+                        className="outline outline-input transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full resize-none h-40"
+                        maxLength={600}
                     />
                     <input
                         type="text"
@@ -76,6 +81,7 @@ const EditProfileForm = ({
                         className="outline outline-input transition-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full"
                         pattern="^\+[0-9]{1,4} [0-9]{3} [0-9]{3} [0-9]{4}$"
                         title="+12 345 678 9101"
+                        maxLength={20}
                     />
                     
                     <div className="flex justify-between">

@@ -24,8 +24,7 @@ const Publications = () => {
         ? publicationsFollowed
         : publications;
 
-    const noFollowing = showFollowedOnly && followingUsers.length === 0;
-    const noFollowingPublications = showFollowedOnly && publicationsFollowed.length === 0;
+    const noPublications = showFollowedOnly && publicationsFollowed.length === 0;
 
     filteredPublications = [...filteredPublications].sort((a, b) => {
         if (sortByRelevance) {
@@ -54,15 +53,11 @@ const Publications = () => {
                 </button>
             </div>
 
-            {(noFollowing && !noFollowingPublications) && (
-                <p className="text-center text-second-text">You are not following anyone yet.</p>
+            {noPublications && (
+                <p className="text-center text-second-text">No publications here...</p>
             )}
 
-            {noFollowingPublications && (
-                <p className="text-center text-second-text">Not publications for your followed users.</p>
-            )}
-
-            {!noFollowingPublications && filteredPublications.map(publication => (
+            {!noPublications && filteredPublications.map(publication => (
                 <PublicationCard
                     key={publication.id}
                     id={publication.id}

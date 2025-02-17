@@ -27,7 +27,7 @@ const ProfilePage = ({
     let biographyP = biography;
 
     if (biographyP != null) {
-        biographyP = <p className="mt-1 text-sm text-primary-text">{biography}</p>
+        biographyP = <p className="mt-1 text-sm text-primary-text break-all">{biography}</p>
     }
 
     let followButton;
@@ -53,13 +53,13 @@ const ProfilePage = ({
                     onError={(e) => e.target.src = DEFAULT_PROFILE_PHOTO}
                 />
                 <h2 className="text-xl text-primary-text font-bold break-all">{fullName}</h2>
-                <p className="text-second-text">@{username}</p>
+                <p className="text-second-text break-all">@{username}</p>
                 <p className="mt-1 text-sm text-primary-text">{createdTime}</p>
                 {updatedP}
             </div>
             <div className="w-72">
                 {biographyP}
-                <p className="mt-1 text-sm text-primary-text">{email}</p>
+                <p className="mt-1 text-sm text-primary-text break-all">{email}</p>
                 <p className="mt-1 text-sm text-primary-text">{phone}</p>
                 <p className="mt-1 text-sm text-primary-text">{brithDate}</p>
                 {followButton}

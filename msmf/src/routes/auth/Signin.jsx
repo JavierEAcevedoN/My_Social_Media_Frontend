@@ -32,27 +32,27 @@ const Signin = () => {
             <h2 className="text-xl font-bold mb-4">Sing In</h2>
             <div className="flex flex-col gap-2">
                 <label>User:
-                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow" type="text" placeholder="User" name="username" required value={username} onChange={(e) => setUsername(e.target.value)} />
+                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid" title="only letters and numbers no spaces" type="text" placeholder="User" pattern="^[A-Za-z0-9]*$" name="username" maxLength={128} required value={username} onChange={(e) => setUsername(e.target.value)} />
                 </label>
             </div>
             <div className="flex flex-col gap-2">
                 <label>Email:
-                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid" type="email" placeholder="Email" name="email" required pattern="^.*@.*\..{3}$" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid" type="email" placeholder="Email" name="email" required pattern="^.*@.*\..{3}$" maxLength={256} value={email} onChange={(e) => setEmail(e.target.value)} />
                 </label>
             </div>
             <div className="flex flex-col gap-2">
                 <label>Full Name:
-                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow" type="text" placeholder="Full Name" name="fullName" required value={fullName} onChange={(e) => setFullName(e.target.value)} />
+                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid" type="text" placeholder="Full Name" pattern="^[A-Za-z0-9 ]*$" title="only letters, numbers and spaces" maxLength={512} name="fullName" required value={fullName} onChange={(e) => setFullName(e.target.value)} />
                 </label>
             </div>
             <div className="flex flex-col gap-2">
                 <label>Password:
-                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid" type="password" placeholder="Password" name="password" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[%$;&.,#])[A-Za-z\d%$;&.,#]{8,12}$" title="The password already have a Mayus letter, Minus letter, A number, And a special caracter [%$;&.,#]" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid" type="password" placeholder="Password" name="password" required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[%$;&.,#])[A-Za-z\d%$;&.,#]{8,12}$" title="The password already have a Mayus letter, Minus letter, A number, And a special caracter [%$;&.,#]" maxLength={12} value={password} onChange={(e) => setPassword(e.target.value)} />
                 </label>
             </div>
             <div className="flex flex-col gap-2">
                 <label>Phone:
-                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow" type="text" placeholder="Phone" name="phone" required value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid" pattern="^\+[0-9]{1,4} [0-9]{3} [0-9]{3} [0-9]{4}$" title="+12 345 678 9101" type="text" placeholder="Phone" name="phone" maxLength={20} required value={phone} onChange={(e) => setPhone(e.target.value)} />
                 </label>
             </div>
             <div className="flex flex-col gap-2">

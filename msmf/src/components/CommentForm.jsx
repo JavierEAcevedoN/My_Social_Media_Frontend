@@ -59,6 +59,7 @@ const CommentForm = ({ isOpen, onClose }) => {
                         onChange={(e) => setContent(e.target.value)}
                         required
                         className="outline outline-input transition-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full resize-none h-60"
+                        maxLength={200}
                     />
                     <input
                         type="text"
@@ -66,6 +67,7 @@ const CommentForm = ({ isOpen, onClose }) => {
                         value={userTagged}
                         onChange={(e) => setUserTagged(e.target.value)}
                         className="outline outline-input transition-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full"
+                        maxLength={128}
                     />
                     <div className="flex justify-between">
                         <button 

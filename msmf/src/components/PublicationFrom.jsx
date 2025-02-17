@@ -56,11 +56,12 @@ const PublicationForm = ({ isOpen, onClose, existingPublication }) => {
                 {error && <p className="text-red-500 text-sm text-center">{error}</p>}
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <textarea
-                        placeholder="What do you think?"
+                        placeholder="What are you thinkig about?"
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         required
                         className="outline outline-input transition-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full resize-none h-60"
+                        maxLength={500}
                     />
                     <input
                         type="url"
@@ -76,6 +77,8 @@ const PublicationForm = ({ isOpen, onClose, existingPublication }) => {
                         pattern="^#\w+(\s+#\w+)*$"
                         onChange={(e) => setTags(e.target.value)}
                         className="outline outline-input transition-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full"
+                        title="#a #a"
+                        maxLength={24}
                     />
                     <div className="flex justify-between">
                         <button 

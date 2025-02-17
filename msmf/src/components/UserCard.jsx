@@ -65,14 +65,14 @@ const UserCard = ({
                             {fullName}
                         </h3>
                         <div className="text-second-text text-sm break-all lg:break-normal">
-                            <span>@{username} · </span>
+                            <span className="break-all">@{username} · </span>
                             <span>{createdTime}</span>
                             {updatedSpan}
                         </div>
                     </div>
                 </div>
                 <button
-                    className={`text-2xl break-all md:break-normal ${following ? "bg-primary hover:bg-third  text-primary-text hover:text-second-text" : "bg-third hover:bg-primary text-second-text hover:text-primary-text"} w-full lg:w-auto transition-colors p-2 rounded-2xl outline outline-input `}
+                    className={`cursor-pointer text-2xl break-all md:break-normal ${following ? "bg-primary hover:bg-third  text-primary-text hover:text-second-text" : "bg-third hover:bg-primary text-second-text hover:text-primary-text"} w-full lg:w-auto transition-colors p-2 rounded-2xl outline outline-input `}
                     onClick={toggleFollow}
                 >
                     {following ? "Following" : "Follow"}
