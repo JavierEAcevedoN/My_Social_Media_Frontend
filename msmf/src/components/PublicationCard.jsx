@@ -93,6 +93,10 @@ const PublicationCard = ({
                         </div>
     }
 
+    const goToUserPro = () => {
+        window.location = `/dashboard/user/${username}`
+    };
+
     return (
         <article className="bg-secondary p-4 rounded-xl shadow-lg shadow-third border border-third 200 max-w-xl mx-auto w-full">
             <header className="flex flex-col justify-between items-start sm:flex-row gap-3">
@@ -104,7 +108,7 @@ const PublicationCard = ({
                         onError={(e) => e.target.src = DEFAULT_PROFILE_PHOTO}
                     />
                     <div>
-                        <h3 className="font-semibold text-primary-text break-words break-all">
+                        <h3 onClick={goToUserPro} className="font-semibold text-primary-text break-all hover:underline cursor-pointer">
                             {fullName}
                         </h3>
                         <div className="text-second-text text-sm">

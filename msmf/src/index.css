@@ -25,22 +25,6 @@
     --default-transition-duration: 300ms;
 }
 
-.ligth {
-    --color-primary: #ffffff;
-    --color-primary-text: #000000;
-    --color-second-text: #505050; 
-    --color-third-text: #1e51ee; 
-    --color-secondary: #e9e9e9; 
-    --color-third: #cfcfcf;
-    --color-four: #029db1; 
-    --color-five: #029db1; 
-
-    --color-input: #029db1;
-    --color-input-focus: #53eafd; 
-    --color-input-invalid: #e7000b;
-    --color-input-shadow: #0092b8;
-}
-
 .dark {
     --color-primary: #1e1e1e;
     --color-primary-text: #ffffff;

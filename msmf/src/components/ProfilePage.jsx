@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import EditProfileForm from "./EditProfileForm ";
+import AuthContext from "../context/AuthContext";
+import api from "../api";
 
 const ProfilePage = ({
     profilePhoto,
@@ -13,8 +15,6 @@ const ProfilePage = ({
     brithDate
 }) => {
     const DEFAULT_PROFILE_PHOTO = "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png";
-
-    const [following, setFollowing] = useState(false);
 
     const createdTime = created.split("T").join(" ")
 
@@ -30,17 +30,61 @@ const ProfilePage = ({
         biographyP = <p className="mt-1 text-sm text-primary-text break-all">{biography}</p>
     }
 
-    let followButton;
+    const { user } = useContext(AuthContext);
+
+    const fetchIsFollowing = async () => {
+        try {
+            const { data } = await api.get(`/follows/${user}/${username}`); 
+            setFollowing(data)
+        } catch (error) {
+            console.error(error.response?.data?.message || "Error fetching isFollowing");
+        }
+    };
+
+    const notMainProfile = window.location.pathname.includes("profile") || window.location.pathname.includes(user);
+
+    useEffect(() => {
+        if (!notMainProfile) {
+            fetchIsFollowing();
+        }
+    }, [username, user]);
+
+    const toggleFollow = async () => {
+        try {
+            if (!following) {
+                await api.post(`/follows/${user}/${username}`);
+            } else {
+                await api.delete(`/follows/${user}/${username}`);                
+            }
+            setFollowing(!following)
+            setTimeout(() => window.location.reload(),300)
+        } catch (error) {
+            console.error(error.response?.data?.message || "Error fetching isLiked");
+        }
+    };
+
+    let optionsButton;
 
     const [isEditing, setIsEditing] = useState(false);
 
-    if (!window.location.pathname.includes("profile")) {
-        followButton = <button
-                            className={`text-2xl mt-4 ${following ? "bg-primary hover:bg-third  text-primary-text hover:text-second-text" : "bg-third hover:bg-primary text-second-text hover:text-primary-text"} transition-colors p-2 rounded-2xl outline outline-input `}
-                            onClick={() => setFollowing(!following)}
-                        >
-                            {following ? "Following" : "Follow"}
-                        </button>
+    const [following, setFollowing] = useState(false);
+
+    if (!notMainProfile) {
+        optionsButton = 
+        <button
+            className={`text-2xl mt-4 ${following ? "bg-primary hover:bg-third  text-primary-text hover:text-second-text" : "bg-third hover:bg-primary text-second-text hover:text-primary-text"} transition-colors p-2 rounded-2xl outline outline-input `}
+            onClick={() => toggleFollow()}
+        >
+            {following ? "Following" : "Follow"}
+        </button>
+    } else {
+        optionsButton = 
+        <button 
+            className="text-2xl bg-primary hover:bg-third outline outline-input transition-colors text-primary-text px-4 p-2 rounded-2xl mt-4"
+            onClick={() => setIsEditing(true)}
+        >
+            Edit Profile
+        </button>
     }
 
     return (
@@ -62,14 +106,8 @@ const ProfilePage = ({
                 <p className="mt-1 text-sm text-primary-text break-all">{email}</p>
                 <p className="mt-1 text-sm text-primary-text">{phone}</p>
                 <p className="mt-1 text-sm text-primary-text">{brithDate}</p>
-                {followButton}
 
-                <button 
-                    className="bg-third outline outline-input transition-colors text-primary-text px-4 py-2 rounded-lg hover:bg-primary mt-4"
-                    onClick={() => setIsEditing(true)}
-                >
-                    Edit Profile
-                </button>
+                {optionsButton}
 
                 {isEditing && (
                     <EditProfileForm

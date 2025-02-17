@@ -67,6 +67,7 @@ const CommentForm = ({ isOpen, onClose }) => {
                         value={userTagged}
                         onChange={(e) => setUserTagged(e.target.value)}
                         className="outline outline-input transition-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full"
+                        pattern="^[A-Za-z0-9]*$"
                         maxLength={128}
                     />
                     <div className="flex justify-between">

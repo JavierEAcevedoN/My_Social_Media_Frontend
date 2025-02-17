@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import api from "../api";
+import { useNavigate } from "react-router-dom";
 
 const UserCard = ({
     profilePhoto,
@@ -49,6 +50,10 @@ const UserCard = ({
         }
     };
 
+    const goToUserPro = () => {
+        window.location = `/dashboard/user/${username}`
+    };
+
     return (
         <article className="bg-secondary p-4 rounded-xl shadow-lg shadow-third border border-third max-w-xl mx-auto w-full">
             <main className="flex items-start justify-between flex-col lg:flex-row flex-wrap lg:flex-nowrap gap-3 w-full">
@@ -58,10 +63,9 @@ const UserCard = ({
                         alt="User Avatar" 
                         className="w-12 h-12 rounded-full"
                         onError={(e) => e.target.src = DEFAULT_PROFILE_PHOTO}
-                        /* TODO: agregar el boton para llevar al perfil */
                     />
                     <div>
-                        <h3 className="font-semibold text-primary-text break-all">
+                        <h3 onClick={goToUserPro} className="font-semibold text-primary-text break-all hover:underline cursor-pointer">
                             {fullName}
                         </h3>
                         <div className="text-second-text text-sm break-all lg:break-normal">

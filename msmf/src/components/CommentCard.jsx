@@ -9,6 +9,10 @@ const CommentCard = ({
 }) => {
     const createdTime = created.split("T").join(" ")
 
+    const goToUserPro = (username) => {
+        window.location = `/dashboard/user/${username}`
+    };
+
     let updatedSpan = updated;
 
     if (updatedSpan != null) {
@@ -18,7 +22,7 @@ const CommentCard = ({
     let taggedSpan = tagged;
 
     if (taggedSpan != null) {
-        taggedSpan = <span className="text-four flex flex-wrap gap-1 cursor-pointer">@{tagged}</span>
+        taggedSpan = <span onClick={() => goToUserPro(tagged)} className="text-four flex flex-wrap gap-1 cursor-pointer">@{tagged}</span>
     }
 
     const DEFAULT_PROFILE_PHOTO = "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png";
@@ -33,7 +37,7 @@ const CommentCard = ({
                     onError={(e) => e.target.src = DEFAULT_PROFILE_PHOTO}
                 />
                 <div>
-                    <h3 className="font-semibold text-primary-text break-all">
+                    <h3 onClick={() => goToUserPro(username)} className="font-semibold text-primary-text break-all hover:underline cursor-pointer">
                         {fullName}
                     </h3>
                     <div className="text-second-text text-sm">
