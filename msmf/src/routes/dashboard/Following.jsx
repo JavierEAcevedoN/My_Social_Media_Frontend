@@ -29,6 +29,7 @@ const Following = () => {
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
 
     if (!following) return <h1 className="self-center">You aren't following</h1>;
+    
 
     return (
         <>
