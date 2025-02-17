@@ -1,13 +1,14 @@
 import { useState, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import api from "../api";
+import { useParams } from "react-router-dom";
 
-const PublicationForm = ({ isOpen, onClose, existingPublication }) => {
+const CommentForm = ({ isOpen, onClose }) => {
     const { user } = useContext(AuthContext);
-    
-    const [content, setContent] = useState(existingPublication?.content ||"");
-    const [imgSrc, setImgSrc] = useState(existingPublication?.imgSrc ||"");
-    const [tags, setTags] = useState(existingPublication?.tags?.join(" ") ||"");
+    const idPublicaton = Number(useParams().id);
+
+    const [content, setContent] = useState("");
+    const [userTagged, setUserTagged] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -20,26 +21,25 @@ const PublicationForm = ({ isOpen, onClose, existingPublication }) => {
         const offset = now.getTimezoneOffset();
         const adjustedDate = new Date(now.getTime() - offset * 60000).toISOString();
 
-        const newPublication = {
+        const newComment = {
             content,
             created: adjustedDate,
-            tags: tags.split(" ").filter(tag => tag.startsWith("#")),
-            imgSrc,
+            idPublication: {
+                "id": idPublicaton
+            },
             username: {
-                "username":user
+                "username": user
             }
         };
-
+        if (userTagged != "") {
+            newComment.tagged = { username: userTagged };
+        }        
         try {
-            if (existingPublication) {
-                await api.patch(`/publications/${existingPublication.id}`, newPublication);
-            } else {
-                await api.post("/publications", newPublication);
-            }
+            await api.post("/comments", newComment);
             onClose();
             window.location.reload()
         } catch (error) {
-            setError(error.response?.data?.message || "Error to create/update publication");
+            setError(error.response?.data?.message || "Error to create comment check de tag user");
         } finally {
             setLoading(false);
         }
@@ -50,47 +50,37 @@ const PublicationForm = ({ isOpen, onClose, existingPublication }) => {
     return (
         <div className="fixed inset-0 bg-primary bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-secondary p-6 rounded-lg shadow-lg max-w-md w-full">
-                <h2 className="text-xl font-bold mb-4 text-center">
-                    {existingPublication ? "Edit publication" : "New publication"}
-                </h2>
-                {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+                <h2 className="text-xl font-bold mb-4 text-center">Nueva Publicación</h2>
+                {error && <p className="text-red-500 text-sm text-center mb-1">{error}</p>}
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <textarea
-                        placeholder="What do you think?"
+                        placeholder="Write your opinion"
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         required
                         className="outline outline-input transition-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full resize-none h-60"
                     />
                     <input
-                        type="url"
-                        placeholder="img url (optional)"
-                        value={imgSrc}
-                        onChange={(e) => setImgSrc(e.target.value)}
-                        className="outline outline-input transition-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full"
-                    />
-                    <input
                         type="text"
-                        placeholder="Tags #tag1 #tag2 (optional)"
-                        value={tags}
-                        pattern="^#\w+(\s+#\w+)*$"
-                        onChange={(e) => setTags(e.target.value)}
+                        placeholder="tag user (optional)"
+                        value={userTagged}
+                        onChange={(e) => setUserTagged(e.target.value)}
                         className="outline outline-input transition-shadow focus:invalid:outline-input-invalid focus:invalid:shadow-input-invalid focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow bg-third text-primary-text rounded-lg p-2 w-full"
                     />
                     <div className="flex justify-between">
                         <button 
                             type="button"
                             onClick={onClose}
-                            className="bg-third outline outline-input transition-colors text-primary-text px-4 py-2 rounded-lg hover:bg-primary cursor-pointer"
+                            className="bg-third outline outline-input transition-colors text-primary-text px-4 py-2 rounded-lg hover:bg-primary"
                         >
                             Cancel
                         </button>
                         <button 
                             type="submit"
                             disabled={loading}
-                            className="bg-third outline outline-input transition-colors text-primary-text px-4 py-2 rounded-lg hover:bg-five cursor-pointer"
+                            className="bg-third outline outline-input transition-colors text-primary-text px-4 py-2 rounded-lg hover:bg-five"
                         >
-                            {existingPublication ? "Save" : "Submit"}
+                            {loading ? "Submitting..." : "Submit"}
                         </button>
                     </div>
                 </form>
@@ -99,4 +89,4 @@ const PublicationForm = ({ isOpen, onClose, existingPublication }) => {
     );
 };
 
-export default PublicationForm;
+export default CommentForm;

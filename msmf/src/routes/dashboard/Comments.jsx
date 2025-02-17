@@ -1,14 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import PublicationContext from "../../context/PublicationContext";
 import PublicationCard from "../../components/PublicationCard";
 import { Navigate, useParams } from "react-router-dom";
 import CommentCard from "../../components/CommentCard";
+import CommentForm from "../../components/CommentForm";
 
 const Comments = () => {
     const idPublicaton = useParams().id;
-    
+
     const { publications, loading, error } = useContext(PublicationContext);
     const publication = publications.find(i => i.id == idPublicaton)
+    const [isFormOpenSubmit, setIsFormOpenSubmit] = useState(false);
 
     if (loading) return <p className="self-center">Loadin comments...</p>;
     if (error) return <p className="self-center text-red-500">Error: {error}</p>;
@@ -19,6 +21,13 @@ const Comments = () => {
 
     return (
         <>
+            <CommentForm isOpen={isFormOpenSubmit} onClose={() => setIsFormOpenSubmit(false)} />
+            <button 
+                onClick={() => setIsFormOpenSubmit(true)} 
+                className="fixed bottom-5 right-5 transition-colors bg-input hover:bg-input-focus text-primary-text px-4 py-2 rounded-full shadow-lg shadow-third cursor-pointer"
+            >
+                + New comment
+            </button>
             <PublicationCard
                 key={publication.id}
                 id={publication.id}
