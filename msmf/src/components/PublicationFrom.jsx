@@ -49,7 +49,7 @@ const PublicationForm = ({ isOpen, onClose, existingPublication }) => {
 
     return (
         <div className="fixed inset-0 bg-primary bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-secondary p-6 rounded-lg shadow-lg max-w-md w-full">
+            <div className="bg-secondary p-6 rounded-lg shadow-lg max-w-md w-full mb-1">
                 <h2 className="text-xl font-bold mb-4 text-center">
                     {existingPublication ? "Edit publication" : "New publication"}
                 </h2>

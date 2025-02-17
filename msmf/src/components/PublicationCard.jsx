@@ -88,8 +88,8 @@ const PublicationCard = ({
 
     if (username === user) {
         optionsButton = <div className="flex flex-col gap-2">
-                            <button onClick={() => setIsEditOpen(true)} className="text-third-text">✏️ Edit</button>
-                            <button onClick={handleDelete} className="text-input-invalid">🗑️ Delete</button>
+                            <button onClick={() => setIsEditOpen(true)} className="text-third-text cursor-pointer">✏️ Edit</button>
+                            <button onClick={handleDelete} className="text-input-invalid cursor-pointer">🗑️ Delete</button>
                         </div>
     }
 
