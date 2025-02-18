@@ -67,7 +67,7 @@ Puedes ver un videdo de demostracion del aplicativo aqui:
 
 Puedes encontrar el repositorio del frontend aqui:
 - [Repositorio Backend](https://github.com/JavierEAcevedoN/My_Social_Media_Backend)  
-Ultimo Hash: ``d115fecada4f3df8eb11541679310e3e6a113a1d``
+Ultimo Hash: ``5ff59d027cd590e9bd7a2d2f990cecfdb8b751ce``
 
 <h3 id="autor">Autor 👤</h3>
 
