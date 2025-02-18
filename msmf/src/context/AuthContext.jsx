@@ -22,6 +22,21 @@ export const AuthProvider = ({ children }) => {
 
     const signin = async (username, email, fullName, password, phone, birthDate) => {
         try {
+            const birth = new Date(birthDate);
+            const today = new Date();
+            
+            const age = today.getFullYear() - birth.getFullYear();
+            const monthDiff = today.getMonth() - birth.getMonth();
+            const dayDiff = today.getDate() - birth.getDate();
+    
+            if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                age--;
+            }
+    
+            if (age < 14) {
+                throw new Error("You need to have 14 or plus to register");
+            }
+
             const { data } = await axios.post("http://localhost:8080/auth/register", { username, email, fullName, password, phone, birthDate });
 
             sessionStorage.setItem("token", data.token);

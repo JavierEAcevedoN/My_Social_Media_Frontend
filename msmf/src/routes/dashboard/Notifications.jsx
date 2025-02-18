@@ -30,8 +30,6 @@ const Notifications = () => {
 
     if (!notifications) return <h1 className="self-center">You don't have notifications</h1>;
 
-    // Todo: agregar el boton de leido
-
     return (
         <>
             {notifications.map(notification => (

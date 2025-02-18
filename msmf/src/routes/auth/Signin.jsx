@@ -57,7 +57,7 @@ const Signin = () => {
             </div>
             <div className="flex flex-col gap-2">
                 <label>Birth Date:
-                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow" type="date" name="birthDate" max={birtDateMinimun} required value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
+                    <input className="rounded-2xl outline outline-input bg-third p-2.5 w-full transition-shadow focus:outline-input-focus focus:shadow-input-auth focus:shadow-input-shadow" type="date" name="birthDate"  required value={birthDate} onChange={(e) => setBirthDate(e.target.value)} />
                 </label>
             </div>
             <button className="bg-four text-black font-bold p-3 rounded cursor-pointer transition-colors hover:bg-five w-full" type="submit">SignIn</button>

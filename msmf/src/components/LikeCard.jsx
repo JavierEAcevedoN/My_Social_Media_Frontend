@@ -26,7 +26,7 @@ const UserCard = ({
                         {fullName}
                     </h3>
                     <div className="text-second-text text-sm">
-                        <span>@{username} · </span>
+                        <span className="break-all">@{username} · </span>
                         <span>{likedTime}</span>
                     </div>
                 </div>

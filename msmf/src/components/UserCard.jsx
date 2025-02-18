@@ -56,7 +56,7 @@ const UserCard = ({
 
     return (
         <article className="bg-secondary p-4 rounded-xl shadow-lg shadow-third border border-third max-w-xl mx-auto w-full">
-            <main className="flex items-start justify-between flex-col lg:flex-row flex-wrap lg:flex-nowrap gap-3 w-full">
+            <main className="flex items-start justify-between flex-col xl:flex-row flex-wrap x1:flex-nowrap gap-3 w-full">
                 <div className="flex flex-col md:flex-row gap-3">
                     <img 
                         src={profilePhoto || DEFAULT_PROFILE_PHOTO} 
