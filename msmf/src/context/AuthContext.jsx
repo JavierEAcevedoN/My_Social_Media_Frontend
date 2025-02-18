@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
             const birth = new Date(birthDate);
             const today = new Date();
             
-            const age = today.getFullYear() - birth.getFullYear();
+            let age = today.getFullYear() - birth.getFullYear();
             const monthDiff = today.getMonth() - birth.getMonth();
             const dayDiff = today.getDate() - birth.getDate();
     
